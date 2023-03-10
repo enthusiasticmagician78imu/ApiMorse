@@ -19,5 +19,5 @@ from .apps.api.views import user_api_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("<str:data>/", user_api_view, name="api"),
+    path("api/", user_api_view, name="api"),
 ]

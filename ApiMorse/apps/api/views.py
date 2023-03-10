@@ -12,39 +12,12 @@ conn_str = "mongodb+srv://urgosxd:4421210samu@cluster0.zf2s5.mongodb.net/?retryW
 # set a 5-second connection timeout
 client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS=5000)
 
-# try:
-
-#     result = client.get_database("Cluster0")["tasks"].aggregate(
-#         [
-#             {
-#                 "$search": {
-#                     "compound": {
-#                         "must": [
-#                             {
-#                                 "phrase": {
-#                                     "path": "content",
-#                                     "query": "Bases de datos",
-#                                 }
-#                             },
-#                             {"text": {"path": "typeCurse", "query": "ddbb"}},
-#                         ]
-#                     }
-#                 }
-#             },
-#             {"$project": {"title": 1, "typeCurse": 1, "content": 1, "_id": 0}},
-#         ]
-#     )
-#     for idx, i in enumerate(result):
-#         print(idx)
-
-# except Exception:
-#     print("Unable to connect to the server.")
-
-
 @api_view(["GET"])
-def user_api_view(request, data):
+def user_api_view(request):
     if request.method == "GET":
-        data = data.split("-")
+        data = []
+        data.append(request.query_params["base"])
+        data.append(request.query_params["quer"])
         try:
             result = client.get_database("Cluster0")["tasks"].aggregate(
                 [
