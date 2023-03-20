@@ -36,7 +36,7 @@ def user_api_view(request):
                             }
                         }
                     },
-                    {"$project": {"content": 1, "_id": 0}},
+                    {"$project": {"content": 1,"typeCurse":1,"title":1, "_id": 0}},
                 ]
             )
             return Response(result)
